@@ -30,7 +30,6 @@ public class NotificationTest {
     @Test
     public void emptyCtor() {
         notification = new Notification();
-
     }
 
     @Test
@@ -68,7 +67,6 @@ public class NotificationTest {
         notification.setContent("Hello");
         Assert.assertEquals("Hello",
                 notification.getElement().getChild(0).getProperty("innerHTML"));
-        
     }
 
     @Test
