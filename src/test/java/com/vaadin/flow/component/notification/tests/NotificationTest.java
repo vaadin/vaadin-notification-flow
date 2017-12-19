@@ -27,12 +27,6 @@ public class NotificationTest {
 
     private Notification notification;
 
-    private static final String TEST_STRING = "lorem ipsum";
-
-    private static final String THEME_ATTRIBUTE = "theme";
-    private static final String THEME_ATTRIBUTE_ICON = "icon";
-    private static final String THEME_ATTRIBUTE_PRIMARY = "primary";
-
     @Test
     public void emptyCtor() {
         notification = new Notification();

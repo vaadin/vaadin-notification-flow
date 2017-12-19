@@ -15,8 +15,8 @@
  */
 package com.vaadin.flow.component.notification.demo;
 
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.HorizontalAlign;
 import com.vaadin.flow.component.notification.Notification.VerticalAlign;
@@ -39,28 +39,33 @@ public class NotificationView extends DemoView {
     }
 
     private void createDefaultNotificaiton() {
-        Button button = new Button(BUTTON_CAPTION);
+        NativeButton button = new NativeButton(BUTTON_CAPTION);
         // begin-source-example
         // source-example-heading: Default Notification
         Notification notification = new Notification(
                 "<h3>Hello World!</h3>"
                         + "This notification has HTML content",
-                4);
+                4000);
         // end-source-example
+        button.setId("default-notification-button");
         button.addClickListener(event -> notification.open());
+        notification.setId("default-notification");
         addCard("Default Notification", notification, button);
     }
 
     private void createNotificationWithPosition() {
-        Button button = new Button(BUTTON_CAPTION);
+        NativeButton button = new NativeButton(BUTTON_CAPTION);
         // begin-source-example
         // source-example-heading: Notification with position
         Notification notification = new Notification(
                 "<h3>Hello World!</h3>"
-                        + "This notification has positioning information",
-                4000, VerticalAlign.MIDDLE, HorizontalAlign.START);
+                        + "This notification has position setting",
+                2000, VerticalAlign.TOP, HorizontalAlign.START);
         // end-source-example
+        button.setId("position-notification-button");
         button.addClickListener(event -> notification.open());
+        notification.setId("position-notification");
         addCard("Notification with position", notification, button);
     }
+
 }
