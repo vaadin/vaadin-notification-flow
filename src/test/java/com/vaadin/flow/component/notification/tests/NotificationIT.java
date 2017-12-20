@@ -52,7 +52,7 @@ public class NotificationIT extends ComponentDemoTest {
         waitUntil(driver -> "true"
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
-        assertNotificationOverlayContent("position setting");
+        assertNotificationOverlayContent("Top-Left");
         Assert.assertEquals(1,
                 findElements(By.id("position-notification")).size());
 
@@ -60,6 +60,27 @@ public class NotificationIT extends ComponentDemoTest {
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
 
+    }
+
+    @Test
+    public void NotificationWithComponent() {
+        findElement(By.id("component-notification-button")).click();
+        waitUntil(driver -> "true"
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+        Assert.assertEquals(1,
+                findElements(By.id("component-notification")).size());
+        assertNotificationOverlayContent("Bye");
+
+        Assert.assertEquals(1, getOverlayContent()
+                .findElements(By.id("button-inside-notification")).size());
+        Assert.assertEquals(1, getOverlayContent()
+                .findElements(By.id("label-inside-notification")).size());
+        getOverlayContent().findElement(By.id("button-inside-notification"))
+                .click();
+        waitUntil(driver -> "false"
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
     }
 
     private void assertNotificationOverlayContent(String expected) {

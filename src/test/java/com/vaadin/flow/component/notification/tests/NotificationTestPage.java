@@ -34,6 +34,9 @@ public class NotificationTestPage extends Div {
     public NotificationTestPage() {
         createNotificationWithButtonControl();
         createTwoNotificitonAtSamePosition();
+        createNotificationAddComponent();
+        createNotificationRemoveComponent();
+        createNotificationRemoveAllComponent();
     }
 
     private void createNotificationWithButtonControl() {
@@ -66,5 +69,69 @@ public class NotificationTestPage extends Div {
         button2.addClickListener(event -> notification2.open());
         add(notification1, button1,
                 notification2, button2);
+    }
+
+    private void createNotificationAddComponent() {
+        NativeButton button = new NativeButton(BUTTON_CAPTION + "add");
+        NativeButton button_off = new NativeButton("Close Notification add");
+        NativeButton button1 = new NativeButton();
+        NativeButton button2 = new NativeButton();
+        NativeButton button3 = new NativeButton();
+        button.setId("open-notification-button-add");
+        button_off.setId("close-notification-button-add");
+        // button1.setId("button1");
+        // button2.setId("button2");
+        // button3.setId("button3");
+
+        Notification notification = new Notification();
+        notification.setId("notification-add-components");
+        notification.add(button1, button2, button3);
+
+        button.addClickListener(event -> notification.open());
+        button_off.addClickListener(event -> notification.close());
+        add(notification, button, button_off);
+    }
+
+    private void createNotificationRemoveComponent() {
+        NativeButton button = new NativeButton(BUTTON_CAPTION + "remove");
+        NativeButton button_off = new NativeButton("Close Notification remove");
+        NativeButton button1 = new NativeButton();
+        NativeButton button2 = new NativeButton();
+        NativeButton button3 = new NativeButton();
+        button.setId("open-notification-button-remove");
+        button_off.setId("close-notification-button-remove");
+        // button1.setId("button1");
+        // button2.setId("button2");
+        // button3.setId("button3");
+
+        Notification notification = new Notification(button1, button2, button3);
+        notification.setId("notification-remove-components");
+        notification.remove(button1);
+
+        button.addClickListener(event -> notification.open());
+        button_off.addClickListener(event -> notification.close());
+        add(notification, button, button_off);
+    }
+
+    private void createNotificationRemoveAllComponent() {
+        NativeButton button = new NativeButton(BUTTON_CAPTION + "remove all");
+        NativeButton button_off = new NativeButton(
+                "Close Notification remove all");
+        NativeButton button1 = new NativeButton();
+        NativeButton button2 = new NativeButton();
+        NativeButton button3 = new NativeButton();
+        button.setId("open-notification-button-remove-all");
+        button_off.setId("close-notification-button-remove-all");
+        // button1.setId("button1");
+        // button2.setId("button2");
+        // button3.setId("button3");
+
+        Notification notification = new Notification(button1, button2, button3);
+        notification.setId("notification-remove-all-components");
+        notification.removeAll();
+
+        button.addClickListener(event -> notification.open());
+        button_off.addClickListener(event -> notification.close());
+        add(notification, button, button_off);
     }
 }

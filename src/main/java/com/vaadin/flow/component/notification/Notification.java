@@ -15,15 +15,25 @@
  */
 package com.vaadin.flow.component.notification;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.dom.Element;
+import com.vaadin.flow.server.VaadinRequest;
 
 /**
  * Server-side component for the <code>vaadin-notification</code> element.
  *
  * @author Vaadin Ltd
  */
-public class Notification extends GeneratedVaadinNotification<Notification> {
+@HtmlImport("bower_components/polymer/polymer.html")
+@HtmlImport("frontend://flow-component-renderer.html")
+public class Notification
+        extends GeneratedVaadinNotification<Notification>
+        implements HasComponents {
     
+    private Element container;
     private final Element templateElement = new Element("template");
     /**
      * Enumeration of all available positions for Vertical Alignment
@@ -40,10 +50,29 @@ public class Notification extends GeneratedVaadinNotification<Notification> {
     }
 
     /**
-     * Default constructor. Create an empty notification with non-auto-closing
+     * Default constructor. Create an empty notification with component support
+     * and non-auto-closing
+     * 
+     * @see #Notification(Component...)
      */
     public Notification() {
-        this("", 0, VerticalAlign.BOTTOM, HorizontalAlign.START);
+        container = new Element("div", false);
+        getElement().appendVirtualChild(container);
+        getElement().getNode().runWhenAttached(ui -> {
+            String appId = UI.getCurrent().getSession().getService()
+                    .getMainDivId(UI.getCurrent().getSession(),
+                            VaadinRequest.getCurrent());
+            appId = appId.substring(0, appId.indexOf("-"));
+
+            int nodeId = container.getNode().getId();
+
+            String template = "<template><flow-component-renderer appid="
+                    + appId + " nodeid=" + nodeId
+                    + "></flow-component-renderer></template>";
+            getElement().setProperty("innerHTML", template);
+        });
+        setAlignment(VerticalAlign.BOTTOM, HorizontalAlign.START);
+        setDuration(0);
     }
 
     /**
@@ -102,10 +131,23 @@ public class Notification extends GeneratedVaadinNotification<Notification> {
         getElement().appendChild(templateElement);
         setContent(content);
         setDuration((double) duration);
-        setVerticalAlign(vertical);
-        setHorizontalAlign(horizontal);
+        setAlignment(vertical, horizontal);
     }
 
+    /**
+     * Creates a notification with given components inside.
+     * <p>
+     * Component support will NOT allow you to use setContent(String Content) in
+     * the notification.
+     * 
+     * @param components
+     *            the components inside the notification
+     * @see #add(Component...)
+     */
+    public Notification(Component... components) {
+        this();
+        add(components);
+    }
     /**
      * Set the content of the notification with given String
      * 
@@ -159,6 +201,7 @@ public class Notification extends GeneratedVaadinNotification<Notification> {
         setVerticalAlign(vertical);
         setHorizontalAlign(horizontal);
     }
+
     /**
      * Opens the notification.
      */
@@ -171,5 +214,32 @@ public class Notification extends GeneratedVaadinNotification<Notification> {
      */
     public void close() {
         setOpened(false);
+    }
+
+    @Override
+    public void add(Component... components) {
+        assert components != null;
+        for (Component component : components) {
+            assert component != null;
+            container.appendChild(component.getElement());
+        }
+    }
+
+    @Override
+    public void remove(Component... components) {
+        for (Component component : components) {
+            assert component != null;
+            if (container.equals(component.getElement().getParent())) {
+                container.removeChild(component.getElement());
+            } else {
+                throw new IllegalArgumentException("The given component ("
+                        + component + ") is not a child of this component");
+            }
+        }
+    }
+
+    @Override
+    public void removeAll() {
+        container.removeAllChildren();
     }
 }

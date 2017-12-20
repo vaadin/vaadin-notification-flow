@@ -44,28 +44,69 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         Assert.assertEquals(1,
                 findElements(By.id("notification-with-button-control")).size());
 
-        getCommandExecutor().executeScript("arguments[0].click()",
-                findElement(By.id("notification-close")));
+        clickElementWithJs(findElement(By.id("notification-close")));
         waitUntil(driver -> "false"
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
-
     }
 
     @Test
     public void TwoNotificitonAtSamePosition() {
         findElement(By.id("notification-button-1")).click();
-        getCommandExecutor().executeScript("arguments[0].click()",
-                findElement(By.id("notification-button-2")));
-
+        clickElementWithJs(findElement(By.id("notification-button-2")));
         waitUntil(driver -> "true"
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
         assertNotificationOverlayContent("1111111");
         assertNotificationOverlayContent("2222222");
-
     }
 
+    @Test
+    public void NotificitonAddComponents() {
+        findElement(By.id("open-notification-button-add")).click();
+        waitUntil(driver -> "true"
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+        Assert.assertEquals(3,
+                getOverlayContent().findElements(By.tagName("button")).size());
+
+        clickElementWithJs(findElement(By.id("close-notification-button-add")));
+        waitUntil(driver -> "false"
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+    }
+
+    @Test
+    public void NotificitonRemoveComponents() {
+        findElement(By.id("open-notification-button-remove")).click();
+        waitUntil(driver -> "true"
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+        Assert.assertEquals(2,
+                getOverlayContent().findElements(By.tagName("button")).size());
+
+        clickElementWithJs(
+                findElement(By.id("close-notification-button-remove")));
+        waitUntil(driver -> "false"
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+    }
+
+    @Test
+    public void NotificitonRemoveAllComponents() {
+        findElement(By.id("open-notification-button-remove-all")).click();
+        waitUntil(driver -> "true"
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+        Assert.assertEquals(0,
+                getOverlayContent().findElements(By.tagName("button")).size());
+
+        clickElementWithJs(
+                findElement(By.id("close-notification-button-remove-all")));
+        waitUntil(driver -> "false"
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+    }
     private void assertNotificationOverlayContent(String expected) {
         String content = getOverlayContent().getText();
         Assert.assertTrue(content.contains(expected));
