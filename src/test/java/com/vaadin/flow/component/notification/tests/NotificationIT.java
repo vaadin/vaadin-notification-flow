@@ -33,14 +33,14 @@ public class NotificationIT extends ComponentDemoTest {
     @Test
     public void DefaultNotification() {
         findElement(By.id("default-notification-button")).click();
-        waitUntil(driver -> "true"
+        waitUntil(driver -> Boolean.TRUE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
         assertNotificationOverlayContent("HTML content");
         Assert.assertEquals(1,
                 findElements(By.id("default-notification")).size());
 
-        waitUntil(driver -> "false"
+        waitUntil(driver -> Boolean.FALSE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
 
@@ -49,14 +49,14 @@ public class NotificationIT extends ComponentDemoTest {
     @Test
     public void NotificationWithPosition() {
         findElement(By.id("position-notification-button")).click();
-        waitUntil(driver -> "true"
+        waitUntil(driver -> Boolean.TRUE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
         assertNotificationOverlayContent("Top-Left");
         Assert.assertEquals(1,
                 findElements(By.id("position-notification")).size());
 
-        waitUntil(driver -> "false"
+        waitUntil(driver -> Boolean.FALSE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
 
@@ -65,7 +65,7 @@ public class NotificationIT extends ComponentDemoTest {
     @Test
     public void NotificationWithComponent() {
         findElement(By.id("component-notification-button")).click();
-        waitUntil(driver -> "true"
+        waitUntil(driver -> Boolean.TRUE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
         Assert.assertEquals(1,
@@ -78,7 +78,7 @@ public class NotificationIT extends ComponentDemoTest {
                 .findElements(By.id("label-inside-notification")).size());
         getOverlayContent().findElement(By.id("button-inside-notification"))
                 .click();
-        waitUntil(driver -> "false"
+        waitUntil(driver -> Boolean.FALSE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
     }

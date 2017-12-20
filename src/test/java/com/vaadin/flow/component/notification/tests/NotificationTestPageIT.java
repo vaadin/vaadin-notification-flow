@@ -38,14 +38,14 @@ public class NotificationTestPageIT extends AbstractComponentIT {
     @Test
     public void NotificationWithButtonControl() {
         findElement(By.id("notification-open")).click();
-        waitUntil(driver -> "true"
+        waitUntil(driver -> Boolean.TRUE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
         Assert.assertEquals(1,
                 findElements(By.id("notification-with-button-control")).size());
 
         clickElementWithJs(findElement(By.id("notification-close")));
-        waitUntil(driver -> "false"
+        waitUntil(driver -> Boolean.FALSE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
     }
@@ -54,7 +54,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
     public void TwoNotificitonAtSamePosition() {
         findElement(By.id("notification-button-1")).click();
         clickElementWithJs(findElement(By.id("notification-button-2")));
-        waitUntil(driver -> "true"
+        waitUntil(driver -> Boolean.TRUE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
         assertNotificationOverlayContent("1111111");
@@ -64,14 +64,14 @@ public class NotificationTestPageIT extends AbstractComponentIT {
     @Test
     public void NotificitonAddComponents() {
         findElement(By.id("open-notification-button-add")).click();
-        waitUntil(driver -> "true"
+        waitUntil(driver -> Boolean.TRUE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
         Assert.assertEquals(3,
                 getOverlayContent().findElements(By.tagName("button")).size());
 
         clickElementWithJs(findElement(By.id("close-notification-button-add")));
-        waitUntil(driver -> "false"
+        waitUntil(driver -> Boolean.FALSE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
     }
@@ -79,7 +79,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
     @Test
     public void NotificitonRemoveComponents() {
         findElement(By.id("open-notification-button-remove")).click();
-        waitUntil(driver -> "true"
+        waitUntil(driver -> Boolean.TRUE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
         Assert.assertEquals(2,
@@ -87,7 +87,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
 
         clickElementWithJs(
                 findElement(By.id("close-notification-button-remove")));
-        waitUntil(driver -> "false"
+        waitUntil(driver -> Boolean.FALSE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
     }
@@ -95,7 +95,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
     @Test
     public void NotificitonRemoveAllComponents() {
         findElement(By.id("open-notification-button-remove-all")).click();
-        waitUntil(driver -> "true"
+        waitUntil(driver -> Boolean.TRUE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
         Assert.assertEquals(0,
@@ -103,7 +103,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
 
         clickElementWithJs(
                 findElement(By.id("close-notification-button-remove-all")));
-        waitUntil(driver -> "false"
+        waitUntil(driver -> Boolean.FALSE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
     }
