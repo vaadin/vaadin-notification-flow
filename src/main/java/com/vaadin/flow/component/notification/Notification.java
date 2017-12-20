@@ -17,7 +17,6 @@ package com.vaadin.flow.component.notification;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.server.VaadinRequest;
@@ -32,7 +31,7 @@ import com.vaadin.flow.server.VaadinRequest;
 public class Notification
         extends GeneratedVaadinNotification<Notification>
         implements HasComponents {
-    
+
     private Element container;
     private final Element templateElement = new Element("template");
     /**
@@ -58,9 +57,10 @@ public class Notification
     public Notification() {
         container = new Element("div", false);
         getElement().appendVirtualChild(container);
-        getElement().getNode().runWhenAttached(ui -> {
-            String appId = UI.getCurrent().getSession().getService()
-                    .getMainDivId(UI.getCurrent().getSession(),
+        getElement().getNode()
+                .runWhenAttached(ui -> ui.beforeClientResponse(this, () -> {
+            String appId = ui.getSession().getService()
+                            .getMainDivId(ui.getSession(),
                             VaadinRequest.getCurrent());
             appId = appId.substring(0, appId.indexOf("-"));
 
@@ -70,7 +70,7 @@ public class Notification
                     + appId + " nodeid=" + nodeId
                     + "></flow-component-renderer></template>";
             getElement().setProperty("innerHTML", template);
-        });
+        }));
         setAlignment(VerticalAlign.BOTTOM, HorizontalAlign.START);
         setDuration(0);
     }
