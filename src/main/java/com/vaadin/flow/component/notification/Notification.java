@@ -20,14 +20,12 @@ import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.dom.Element;
-import com.vaadin.flow.server.VaadinRequest;
 
 /**
  * Server-side component for the <code>vaadin-notification</code> element.
  *
  * @author Vaadin Ltd
  */
-@HtmlImport("bower_components/polymer/polymer.html")
 @HtmlImport("frontend://flow-component-renderer.html")
 public class Notification
         extends GeneratedVaadinNotification<Notification>
@@ -66,10 +64,7 @@ public class Notification
 
     private void addComponentTemplate(UI ui) {
         ui.beforeClientResponse(this, () -> {
-            String appId = ui.getSession().getService()
-                    .getMainDivId(ui.getSession(),
-                            VaadinRequest.getCurrent());
-            appId = appId.substring(0, appId.indexOf("-"));
+            String appId = ui.getInternals().getAppId();
             int nodeId = container.getNode().getId();
             String template = "<template><flow-component-renderer appid="
                     + appId + " nodeid=" + nodeId
