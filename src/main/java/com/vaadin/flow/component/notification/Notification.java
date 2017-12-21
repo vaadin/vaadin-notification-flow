@@ -205,6 +205,16 @@ public class Notification
         setOpened(false);
     }
 
+    /**
+     * Adds the given components into this notification.
+     * <p>
+     * The elements in the DOM will not be children of the
+     * {@code <vaadin-notification>} element, but will be inserted into an
+     * overlay that is attached into the {@code <body>}.
+     *
+     * @param components
+     *            the components to add
+     */
     @Override
     public void add(Component... components) {
         assert components != null;
@@ -214,6 +224,12 @@ public class Notification
         }
     }
 
+    /**
+     * Remove the given components from this notification.
+     * 
+     * @param components
+     *            the components to remove
+     */
     @Override
     public void remove(Component... components) {
         for (Component component : components) {
@@ -227,6 +243,9 @@ public class Notification
         }
     }
 
+    /**
+     * Remove all the components from this notification.
+     */
     @Override
     public void removeAll() {
         container.removeAllChildren();
