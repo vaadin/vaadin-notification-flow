@@ -57,24 +57,10 @@ public class Notification
         container = new Element("div", false);
         getElement().appendVirtualChild(container);
         getElement().getNode()
-        .runWhenAttached(this::addComponentTemplate);
+                .runWhenAttached(ui -> ui.beforeClientResponse(this,
+                        () -> attachComponentTemplate(ui)));
         setAlignment(VerticalAlign.BOTTOM, HorizontalAlign.START);
         setDuration(0);
-    }
-
-    private void addComponentTemplate(UI ui) {
-        ui.beforeClientResponse(this, () -> {
-            String appId = ui.getInternals().getAppId();
-            int nodeId = container.getNode().getId();
-            String template = "<template><flow-component-renderer appid="
-                    + appId + " nodeid=" + nodeId
-                    + "></flow-component-renderer></template>";
-            getElement().setProperty("innerHTML", template);
-        });
-    }
-
-    private void attachComponentTamplete(UI ui) {
-
     }
 
     /**
@@ -262,5 +248,14 @@ public class Notification
     @Override
     public void removeAll() {
         container.removeAllChildren();
+    }
+
+    private void attachComponentTemplate(UI ui) {
+        String appId = ui.getInternals().getAppId();
+        int nodeId = container.getNode().getId();
+        String template = "<template><flow-component-renderer appid=" + appId
+                + " nodeid=" + nodeId
+                + "></flow-component-renderer></template>";
+        getElement().setProperty("innerHTML", template);
     }
 }
