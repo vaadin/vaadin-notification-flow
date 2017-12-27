@@ -69,7 +69,7 @@ public class NotificationTest {
         Assert.assertEquals("new",
                 notification.getElement().getChild(0).getProperty("innerHTML"));
         
-        notification.setContent("Hello");
+        notification.setText("Hello");
         Assert.assertEquals("Hello",
                 notification.getElement().getChild(0).getProperty("innerHTML"));
     }

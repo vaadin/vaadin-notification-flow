@@ -51,8 +51,7 @@ public class Notification
      * Default constructor. Create an empty notification with component support
      * and non-auto-closing
      * <P>
-     * Note: Component support constructor will NOT work for string parameter
-     * and {@link #setContent(String)} method
+     * Note: This constructor will NOT take HTML or text as content.
      * 
      */
     public Notification() {
@@ -66,36 +65,36 @@ public class Notification
     }
 
     /**
-     * Creates a Notification with the given String rendered as its HTML
-     * content. The default duration for the notification is 4000 milliseconds
+     * Creates a Notification with the given String rendered as its HTML text.
+     * The default duration for the notification is 4000 milliseconds
      * 
-     * @param content
-     *            the content of the Notification as HTML markup
+     * @param text
+     *            the text of the Notification as HTML markup
      */
-    public Notification(String content) {
-        this(content, 4000, VerticalAlign.BOTTOM,
+    public Notification(String text) {
+        this(text, 4000, VerticalAlign.BOTTOM,
                 HorizontalAlign.START);
     }
 
     /**
-     * Creates a Notification with given String rendered as its HTML content and
+     * Creates a Notification with given String rendered as its HTML text and
      * given Integer rendered as its duration.
      * <p>
      * Set to {@code 0} or a negative number to disable the notification
      * auto-closing.
      * 
-     * @param content
-     *            the content of the Notification as HTML markup
+     * @param text
+     *            the text of the Notification as HTML markup
      * @param duration
      *            the duration in milliseconds to show the notification
      */
-    public Notification(String content, int duration) {
-        this(content, duration, VerticalAlign.BOTTOM,
+    public Notification(String text, int duration) {
+        this(text, duration, VerticalAlign.BOTTOM,
                 HorizontalAlign.START);
     }
 
     /**
-     * Creates a Notification with given content String, duration, vertical and
+     * Creates a Notification with given text String, duration, vertical and
      * horizontal Alignment.
      * <P>
      * Set to {@code 0} or a negative number to disable the notification
@@ -104,8 +103,8 @@ public class Notification
      * Horizontal alignment is skipped in case verticalAlign is set to
      * {@code top-stretch|middle|bottom-stretch}
      * 
-     * @param content
-     *            the content of the Notification as HTML markup
+     * @param text
+     *            the text of the Notification as HTML markup
      * @param duration
      *            the duration in milliseconds to show the notification
      * @param vertical
@@ -116,10 +115,10 @@ public class Notification
      *            {@code start|center|end}
      */
 
-    public Notification(String content, int duration, VerticalAlign vertical,
+    public Notification(String text, int duration, VerticalAlign vertical,
             HorizontalAlign horizontal) {
         getElement().appendChild(templateElement);
-        setContent(content);
+        setText(text);
         setDuration((double) duration);
         setAlignment(vertical, horizontal);
     }
@@ -127,8 +126,7 @@ public class Notification
     /**
      * Creates a notification with given components inside.
      * <p>
-     * Component support will NOT allow you to use setContent(String Content) in
-     * the notification.
+     * Note: This constructor will NOT take HTML or text as content.
      * 
      * @param components
      *            the components inside the notification
@@ -140,15 +138,15 @@ public class Notification
     }
     
     /**
-     * Set the content of the notification with given String
+     * Set the text of the notification with given String
      * <p>
-     * NOTE: this method will NOT work for component support constructors like
-     * {@link #Notification()} and {@link #Notification(Component...)}
+     * NOTE: This method will be overwritten when mixed with component support
+     * constructors
      * 
-     * @param content
+     * @param text
      */
-    public void setContent(String content) {
-        templateElement.setProperty("innerHTML", content);
+    public void setText(String text) {
+        templateElement.setProperty("innerHTML", text);
     }
 
     /**
