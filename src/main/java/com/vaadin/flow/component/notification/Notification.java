@@ -50,8 +50,10 @@ public class Notification
     /**
      * Default constructor. Create an empty notification with component support
      * and non-auto-closing
+     * <P>
+     * Note: Component support constructor will NOT work for string parameter
+     * and {@link #setContent(String)} method
      * 
-     * @see #Notification(Component...)
      */
     public Notification() {
         container = new Element("div", false);
@@ -136,8 +138,12 @@ public class Notification
         this();
         add(components);
     }
+    
     /**
      * Set the content of the notification with given String
+     * <p>
+     * NOTE: this method will NOT work for component support constructors like
+     * {@link #Notification()} and {@link #Notification(Component...)}
      * 
      * @param content
      */
