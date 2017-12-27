@@ -136,7 +136,7 @@ public class Notification
         this();
         add(components);
     }
-    
+
     /**
      * Set the text of the notification with given String
      * <p>
