@@ -107,6 +107,49 @@ public class NotificationTestPageIT extends AbstractComponentIT {
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
     }
+
+    @Test
+    public void NotificationAddTwoComponents() {
+        findElement(By.id("Add-two-components-open")).click();
+        waitUntil(driver -> Boolean.TRUE.toString()
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+        Assert.assertEquals(2,
+                getOverlayContent().findElements(By.tagName("button")).size());
+        clickElementWithJs(findElement(By.id("add-two-components-close")));
+        waitUntil(driver -> Boolean.FALSE.toString()
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+    }
+
+    @Test
+    public void NotificationAddMix() {
+        findElement(By.id("Add-Mix-open")).click();
+        waitUntil(driver -> Boolean.TRUE.toString()
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+        Assert.assertEquals(1,
+                getOverlayContent().findElements(By.tagName("button")).size());
+        clickElementWithJs(findElement(By.id("add-Mix-close")));
+        waitUntil(driver -> Boolean.FALSE.toString()
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+    }
+
+    @Test
+    public void NotificationwithTextAndAddComponent() {
+        findElement(By.id("component-add-text-open")).click();
+        waitUntil(driver -> Boolean.TRUE.toString()
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+        Assert.assertEquals(1,
+                getOverlayContent().findElements(By.tagName("button")).size());
+        clickElementWithJs(findElement(By.id("component-add-text-close")));
+        waitUntil(driver -> Boolean.FALSE.toString()
+                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
+                        .getAttribute("opened")));
+    }
+
     private void assertNotificationOverlayContent(String expected) {
         String content = getOverlayContent().getText();
         Assert.assertTrue(content.contains(expected));

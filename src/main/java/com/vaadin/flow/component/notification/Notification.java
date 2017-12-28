@@ -20,6 +20,7 @@ import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.dom.Element;
+import com.vaadin.flow.internal.HtmlUtils;
 
 /**
  * Server-side component for the <code>vaadin-notification</code> element.
@@ -31,7 +32,7 @@ public class Notification
         extends GeneratedVaadinNotification<Notification>
         implements HasComponents {
 
-    private Element container;
+    private Element container = new Element("div", false);
     private final Element templateElement = new Element("template");
     /**
      * Enumeration of all available positions for Vertical Alignment
@@ -50,17 +51,14 @@ public class Notification
     /**
      * Default constructor. Create an empty notification with component support
      * and non-auto-closing
-     * <P>
+     * <p>
      * Note: To mix text and child components in notification that also supports
      * child components, use the{@link Text} component for the textual parts.
-     * {@link #setText(String)} will NOT take effect in this constructor.
      */
     public Notification() {
-        container = new Element("div", false);
+        getElement().appendChild(templateElement);
         getElement().appendVirtualChild(container);
-        getElement().getNode()
-                .runWhenAttached(ui -> ui.beforeClientResponse(this,
-                        () -> attachComponentTemplate(ui)));
+
         setAlignment(VerticalAlign.BOTTOM, HorizontalAlign.START);
         setDuration(0);
     }
@@ -70,7 +68,7 @@ public class Notification
      * The default duration for the notification is 4000 milliseconds
      * 
      * @param text
-     *            the text of the Notification as HTML markup
+     *            the text of the Notification
      */
     public Notification(String text) {
         this(text, 4000, VerticalAlign.BOTTOM,
@@ -85,7 +83,7 @@ public class Notification
      * auto-closing.
      * 
      * @param text
-     *            the text of the Notification as HTML markup
+     *            the text of the Notification
      * @param duration
      *            the duration in milliseconds to show the notification
      */
@@ -105,7 +103,7 @@ public class Notification
      * {@code top-stretch|middle|bottom-stretch}
      * 
      * @param text
-     *            the text of the Notification as HTML markup
+     *            the text of the Notification
      * @param duration
      *            the duration in milliseconds to show the notification
      * @param vertical
@@ -115,10 +113,10 @@ public class Notification
      *            the horizontal alignment of the notification.Valid values are
      *            {@code start|center|end}
      */
-
     public Notification(String text, int duration, VerticalAlign vertical,
             HorizontalAlign horizontal) {
         getElement().appendChild(templateElement);
+        getElement().appendVirtualChild(container);
         setText(text);
         setDuration((double) duration);
         setAlignment(vertical, horizontal);
@@ -129,7 +127,6 @@ public class Notification
      * <p>
      * Note: To mix text and child components in a component that also supports
      * child components, use the {@link Text} component for the textual parts.
-     * {@link #setText(String)} will NOT take effect in this constructor.
      * 
      * @param components
      *            the components inside the notification
@@ -141,18 +138,17 @@ public class Notification
     }
 
     /**
-     * Set the innerHTML of the notification with given String
+     * Set the text of the notification with given String
      * <p>
-     * NOTE: Method will not take effect in {@link #Notification()} and
-     * {@link #Notification(Component...)}. To mix text and child components in
-     * the notification that also supports child components, for example, use
-     * {@link #Notification()} or {@link #Notification(Component...)} with the
-     * {@link Text} component for the textual parts.
+     * NOTE: When mixing this method with {@link #Notification()} and
+     * {@link #Notification(Component...)}. Method will remove all the
+     * components from the notification.
      * 
      * @param text
      */
     public void setText(String text) {
-        templateElement.setProperty("innerHTML", text);
+        removeAll();
+        templateElement.setProperty("innerHTML", HtmlUtils.escape(text));
     }
 
     /**
@@ -220,17 +216,25 @@ public class Notification
      * The elements in the DOM will not be children of the
      * {@code <vaadin-notification>} element, but will be inserted into an
      * overlay that is attached into the {@code <body>}.
+     * <p>
+     * NOTE: When mixing this method with {@link #Notification(String)},
+     * {@link #Notification(String, int)} and
+     * {@link #Notification(String, int, VerticalAlign, HorizontalAlign)},
+     * method will remove the text content.
      *
      * @param components
      *            the components to add
      */
     @Override
     public void add(Component... components) {
+        templateElement.setProperty("innerHTML", null);
         assert components != null;
         for (Component component : components) {
             assert component != null;
             container.appendChild(component.getElement());
         }
+        getElement().getNode().runWhenAttached(ui -> ui
+                .beforeClientResponse(this, () -> attachComponentTemplate(ui)));
     }
 
     /**
@@ -263,9 +267,9 @@ public class Notification
     private void attachComponentTemplate(UI ui) {
         String appId = ui.getInternals().getAppId();
         int nodeId = container.getNode().getId();
-        String template = "<template><flow-component-renderer appid=" + appId
+        String template = "<flow-component-renderer appid=" + appId
                 + " nodeid=" + nodeId
-                + "></flow-component-renderer></template>";
-        getElement().setProperty("innerHTML", template);
+                + "></flow-component-renderer>";
+        templateElement.setProperty("innerHTML", template);
     }
 }

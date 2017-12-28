@@ -36,7 +36,7 @@ public class NotificationIT extends ComponentDemoTest {
         waitUntil(driver -> Boolean.TRUE.toString()
                 .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
                         .getAttribute("opened")));
-        assertNotificationOverlayContent("HTML content");
+        assertNotificationOverlayContent("text content");
         Assert.assertEquals(1,
                 findElements(By.id("default-notification")).size());
 

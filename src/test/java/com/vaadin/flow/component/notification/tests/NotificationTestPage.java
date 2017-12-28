@@ -37,6 +37,9 @@ public class NotificationTestPage extends Div {
         createNotificationAddComponent();
         createNotificationRemoveComponent();
         createNotificationRemoveAllComponent();
+        createNotificationAddTwoComponents();
+        createNotificationAddMix();
+        createNotificationwithcomponentAndAddText();
     }
 
     private void createNotificationWithButtonControl() {
@@ -124,5 +127,60 @@ public class NotificationTestPage extends Div {
         button.addClickListener(event -> notification.open());
         buttonOff.addClickListener(event -> notification.close());
         add(notification, button, buttonOff);
+    }
+
+    private void createNotificationAddTwoComponents() {
+        Notification n = new Notification();
+        n.setId("add-two-components");
+        NativeButton button1 = new NativeButton(BUTTON_CAPTION);
+        NativeButton button2 = new NativeButton("3333");
+        NativeButton button3 = new NativeButton("4444");
+        NativeButton button4 = new NativeButton("BYE");
+        button1.setId("Add-two-components-open");
+        button2.setId("add-two-components-two");
+        button3.setId("add-two-components-three");
+        button4.setId("add-two-components-close");
+
+        n.add(button2);
+        n.add(button3);
+        button1.addClickListener(event -> n.open());
+        button4.addClickListener(event -> n.close());
+        add(n, button1, button4);
+    }
+
+    private void createNotificationAddMix() {
+        Notification n = new Notification();
+        n.setId("add-Mix");
+        NativeButton button1 = new NativeButton(BUTTON_CAPTION);
+        NativeButton button2 = new NativeButton("3333");
+        NativeButton button3 = new NativeButton("4444");
+        NativeButton button4 = new NativeButton("BYE");
+        button1.setId("Add-Mix-open");
+        button2.setId("add-Mix-two");
+        button3.setId("add-Mix-three");
+        button4.setId("add-Mix-close");
+
+        n.add(button2);
+        n.setText("55555555");
+        n.add(button3);
+        button1.addClickListener(event -> n.open());
+        button4.addClickListener(event -> n.close());
+        add(n, button1, button4);
+    }
+
+    private void createNotificationwithcomponentAndAddText() {
+        Notification n = new Notification("hello", 0);
+        n.setId("component-add-text");
+        NativeButton button1 = new NativeButton(BUTTON_CAPTION);
+        NativeButton button2 = new NativeButton("3333");
+        NativeButton button3 = new NativeButton("BYE");
+        button1.setId("component-add-text-open");
+        button2.setId("component-add-text-two");
+        button3.setId("component-add-text-close");
+
+        n.add(button2);
+        button1.addClickListener(event -> n.open());
+        button3.addClickListener(event -> n.close());
+        add(n, button1, button3);
     }
 }
