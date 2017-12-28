@@ -51,8 +51,9 @@ public class Notification
      * Default constructor. Create an empty notification with component support
      * and non-auto-closing
      * <P>
-     * Note: This constructor will NOT take HTML or text as content.
-     * 
+     * Note: To mix text and child components in notification that also supports
+     * child components, use the{@link Text} component for the textual parts.
+     * {@link #setText(String)} will NOT take effect in this constructor.
      */
     public Notification() {
         container = new Element("div", false);
@@ -126,7 +127,9 @@ public class Notification
     /**
      * Creates a notification with given components inside.
      * <p>
-     * Note: This constructor will NOT take HTML or text as content.
+     * Note: To mix text and child components in a component that also supports
+     * child components, use the {@link Text} component for the textual parts.
+     * {@link #setText(String)} will NOT take effect in this constructor.
      * 
      * @param components
      *            the components inside the notification
@@ -138,10 +141,13 @@ public class Notification
     }
 
     /**
-     * Set the text of the notification with given String
+     * Set the innerHTML of the notification with given String
      * <p>
-     * NOTE: This method will be overwritten when mixed with component support
-     * constructors
+     * NOTE: Method will not take effect in {@link #Notification()} and
+     * {@link #Notification(Component...)}. To mix text and child components in
+     * the notification that also supports child components, for example, use
+     * {@link #Notification()} or {@link #Notification(Component...)} with the
+     * {@link Text} component for the textual parts.
      * 
      * @param text
      */
