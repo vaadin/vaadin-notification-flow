@@ -53,7 +53,7 @@ public class Notification
      * and non-auto-closing
      * <p>
      * Note: To mix text and child components in notification that also supports
-     * child components, use the{@link Text} component for the textual parts.
+     * child components, use the {@link Text} component for the textual parts.
      */
     public Notification() {
         getElement().appendChild(templateElement);
