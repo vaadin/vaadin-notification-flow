@@ -149,7 +149,9 @@ public class Notification
      */
     public void setText(String text) {
         removeAll();
-        templateElement.setProperty("innerHTML", HtmlUtils.escape(text));
+        getElement().getNode().runWhenAttached(
+                ui -> ui.beforeClientResponse(this, () -> templateElement
+                        .setProperty("innerHTML", HtmlUtils.escape(text))));
     }
 
     /**
@@ -228,7 +230,6 @@ public class Notification
      */
     @Override
     public void add(Component... components) {
-        templateElement.setProperty("innerHTML", null);
         assert components != null;
         for (Component component : components) {
             assert component != null;
