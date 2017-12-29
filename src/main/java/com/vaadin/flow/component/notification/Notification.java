@@ -137,6 +137,22 @@ public class Notification
         add(components);
     }
 
+    /**
+     * Shows a notification in the current page with given text, duration and
+     * position.
+     * 
+     * @param text
+     *            the text of the Notification
+     * @param duration
+     *            the duration in milliseconds to show the notification
+     * @param vertical
+     *            the vertical alignment of the notification. Valid values are
+     *            {@code top-stretch|top|middle|bottom|bottom-stretch}
+     * @param horizontal
+     *            the horizontal alignment of the notification.Valid values are
+     *            {@code start|center|end}
+     * @return The notification
+     */
     public static Notification show(String text, int duration,
             VerticalAlign vertical,
             HorizontalAlign horizontal) {
