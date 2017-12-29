@@ -145,6 +145,7 @@ public class Notification
      * components from the notification.
      * 
      * @param text
+     *            the text of the Notification
      */
     public void setText(String text) {
         removeAll();
