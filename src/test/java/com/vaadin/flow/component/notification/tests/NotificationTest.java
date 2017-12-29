@@ -50,9 +50,16 @@ public class NotificationTest {
     public void componentCtor() {
         notification = new Notification(new Label(), new NativeButton());
         notification.setAlignment(VerticalAlign.BOTTOM, HorizontalAlign.END);
-
         Assert.assertEquals("bottom", notification.getVerticalAlign());
         Assert.assertEquals("end", notification.getHorizontalAlign());
+    }
+
+    @Test
+    public void staticCtor() {
+        notification = Notification.show("fooooo", 4000, VerticalAlign.BOTTOM,
+                HorizontalAlign.CENTER);
+        Assert.assertEquals("bottom", notification.getVerticalAlign());
+        Assert.assertEquals("center", notification.getHorizontalAlign());
     }
 
     @Test

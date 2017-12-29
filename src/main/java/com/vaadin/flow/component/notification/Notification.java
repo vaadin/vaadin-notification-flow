@@ -137,6 +137,15 @@ public class Notification
         add(components);
     }
 
+    public static Notification show(String text, int duration,
+            VerticalAlign vertical,
+            HorizontalAlign horizontal) {
+        Notification notification = new Notification(text, duration, vertical,
+                horizontal);
+        notification.open();
+        return notification;
+    }
+
     /**
      * Set the text of the notification with given String
      * <p>

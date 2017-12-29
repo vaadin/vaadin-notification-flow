@@ -35,6 +35,7 @@ public class NotificationView extends DemoView {
     public void initView() {
         createDefaultNotificaiton();
         createNotificationWithPosition();
+        createNotificationUsingStaticConvenienceMethod();
         createNotificationWithComponents();
     }
 
@@ -44,9 +45,9 @@ public class NotificationView extends DemoView {
         // source-example-heading: Default Notification
         Notification notification = new Notification(
                 "This notification has text content", 2000);
+        button.addClickListener(event -> notification.open());
         // end-source-example
         button.setId("default-notification-button");
-        button.addClickListener(event -> notification.open());
         notification.setId("default-notification");
         addCard("Default Notification", notification, button);
     }
@@ -58,11 +59,22 @@ public class NotificationView extends DemoView {
         Notification notification = new Notification(
                 "This notification is located on Top-Left",
                 2000, VerticalAlign.TOP, HorizontalAlign.START);
+        button.addClickListener(event -> notification.open());
         // end-source-example
         button.setId("position-notification-button");
-        button.addClickListener(event -> notification.open());
         notification.setId("position-notification");
         addCard("Notification with position", notification, button);
+    }
+
+    private void createNotificationUsingStaticConvenienceMethod() {
+        // begin-source-example
+        // source-example-heading: Notification using static convenience method
+        Notification notification = Notification.show(
+                "This is a notification created with static convenience method",
+                4000, VerticalAlign.TOP_STRETCH, HorizontalAlign.CENTER);
+        // end-source-example
+        notification.setId("static-notification");
+        addCard("Notification using static convenience method", notification);
     }
 
     private void createNotificationWithComponents() {
@@ -76,11 +88,12 @@ public class NotificationView extends DemoView {
         Notification notification = new Notification(content, buttonInside);
         buttonInside.addClickListener(event -> notification.close());
         notification.setAlignment(VerticalAlign.MIDDLE, HorizontalAlign.CENTER);
+        button.addClickListener(event -> notification.open());
         // end-source-example
         notification.setId("component-notification");
         content.setId("label-inside-notification");
         buttonInside.setId("button-inside-notification");
-        button.addClickListener(event -> notification.open());
         addCard("Notification with components", notification, button);
+
     }
 }
