@@ -96,6 +96,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         findElement(By.id("Add-Mix-open")).click();
         checkNotificaitonIsOpen();
         assertButtonSize(1);
+        Assert.assertFalse(getOverlayContent().getText().contains("5555555"));
         clickElementWithJs(findElement(By.id("add-Mix-close")));
         checkNotificationIsClose();
     }
