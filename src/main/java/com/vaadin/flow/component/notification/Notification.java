@@ -34,18 +34,12 @@ public class Notification
 
     private Element container = new Element("div", false);
     private final Element templateElement = new Element("template");
+    
     /**
-     * Enumeration of all available positions for Vertical Alignment
+     * Enumeration of all available positions for notification component
      */
-    public enum VerticalAlign {
-        TOP_STRETCH, TOP, MIDDLE, BOTTOM, BOTTOM_STRETCH
-    }
-
-    /**
-     * Enumeration of all available positions for Horizontal Alignment
-     */
-    public enum HorizontalAlign {
-        START, CENTER, END
+    public enum Position {
+        TOP_STRETCH, TOP_START, TOP_CENTER, TOP_END, MIDDLE, BOTTOM_START, BOTTOM_CENTER, BOTTOM_END, BOTTOM_STRETCH
     }
 
     /**
@@ -58,8 +52,10 @@ public class Notification
     public Notification() {
         getElement().appendChild(templateElement);
         getElement().appendVirtualChild(container);
-
-        setAlignment(VerticalAlign.BOTTOM, HorizontalAlign.START);
+        getElement().getNode()
+                .runWhenAttached(ui -> ui.beforeClientResponse(this,
+                        () -> attachComponentTemplate(ui)));
+        setPosition(Position.BOTTOM_START);
         setDuration(0);
     }
 
@@ -71,8 +67,7 @@ public class Notification
      *            the text of the Notification
      */
     public Notification(String text) {
-        this(text, 4000, VerticalAlign.BOTTOM,
-                HorizontalAlign.START);
+        this(text, 4000, Position.BOTTOM_START);
     }
 
     /**
@@ -87,9 +82,8 @@ public class Notification
      * @param duration
      *            the duration in milliseconds to show the notification
      */
-    public Notification(String text, int duration) {
-        this(text, duration, VerticalAlign.BOTTOM,
-                HorizontalAlign.START);
+    public Notification(String content, int duration) {
+        this(content, duration, Position.BOTTOM_START);
     }
 
     /**
@@ -113,13 +107,12 @@ public class Notification
      *            the horizontal alignment of the notification.Valid values are
      *            {@code start|center|end}
      */
-    public Notification(String text, int duration, VerticalAlign vertical,
-            HorizontalAlign horizontal) {
+    public Notification(String text, int duration, Position position) {
         getElement().appendChild(templateElement);
         getElement().appendVirtualChild(container);
         setText(text);
         setDuration((double) duration);
-        setAlignment(vertical, horizontal);
+        setPosition(position);
     }
 
     /**
@@ -155,48 +148,15 @@ public class Notification
     }
 
     /**
-     * Set the vertical Alignment of the notification.
-     * 
-     * @param vertical
-     *            the vertical alignment. Valid enumerate values are
-     *            {@code top-stretch|top|middle|bottom|bottom-stretch}
-     */
-    public void setVerticalAlign(VerticalAlign vertical) {
-        this.setVerticalAlign(
-                vertical.toString().toLowerCase().replace('_', '-'));
-    }
-
-    /**
-     * Set the horizontal Alignment of the notification.
+     * Set position of the notification.
      * <P>
-     * Horizontal alignment is skipped in case verticalAlign is set to
-     * {@code top-stretch|middle|bottom-stretch}
      * 
-     * @param horizontal
-     *            the horizontal alignment. Valid values are
-     *            {@code start|center|end}
+     * @param position
+     *            the position of the notification. Valid enumerate values are
+     *            {@code TOP_STRETCH, TOP_START, TOP_CENTER, TOP_END, MIDDLE, BOTTOM_START, BOTTOM_CENTER, BOTTOM_END, BOTTOM_STRETCH}
      */
-    public void setHorizontalAlign(HorizontalAlign horizontal) {
-        this.setHorizontalAlign(horizontal.toString().toLowerCase());
-    }
-
-    /**
-     * Set vertical and Alignment of the notification.
-     * <P>
-     * Horizontal alignment is skipped in case verticalAlign is set to
-     * {@code top-stretch|middle|bottom-stretch}
-     * 
-     * @param vertical
-     *            the vertical alignment. Valid enumerate values are
-     *            {@code top-stretch|top|middle|bottom|bottom-stretch}
-     * @param horizontal
-     *            the horizontal alignment. Valid values are
-     *            {@code start|center|end}
-     */
-    public void setAlignment(VerticalAlign vertical,
-            HorizontalAlign horizontal) {
-        setVerticalAlign(vertical);
-        setHorizontalAlign(horizontal);
+    public void setPosition(Position position) {
+        this.setPosition(position.toString().toLowerCase().replace('_', '-'));
     }
 
     /**

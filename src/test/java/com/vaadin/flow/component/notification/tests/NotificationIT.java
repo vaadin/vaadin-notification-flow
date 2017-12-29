@@ -47,9 +47,7 @@ public class NotificationIT extends ComponentDemoTest {
         assertNotificationOverlayContent("Top-Left");
         Assert.assertEquals(1,
                 findElements(By.id("position-notification")).size());
-
         checkNotificationIsClose();
-
     }
 
     @Test
