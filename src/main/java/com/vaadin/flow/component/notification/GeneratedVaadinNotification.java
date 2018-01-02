@@ -49,7 +49,7 @@ Your work has been saved
         "WebComponent: Vaadin.NotificationElement#1.0.0-alpha4",
         "Flow#1.0-SNAPSHOT" })
 @Tag("vaadin-notification")
-@HtmlImport("frontend://bower_components/vaadin-notification/theme/valo/vaadin-notification.html")
+@HtmlImport("frontend://bower_components/vaadin-notification/src/vaadin-notification.html")
 public class GeneratedVaadinNotification<R extends GeneratedVaadinNotification<R>>
         extends Component implements HasStyle, ComponentSupplier<R> {
 
