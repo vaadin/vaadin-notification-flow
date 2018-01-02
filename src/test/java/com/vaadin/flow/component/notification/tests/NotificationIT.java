@@ -29,6 +29,7 @@ import com.vaadin.testbench.By;
 public class NotificationIT extends ComponentDemoTest {
 
     private static final String DIALOG_OVERLAY_TAG = "vaadin-notification-overlay";
+    private WebElement overlay;
 
     @Test
     public void defaultNotification() {
@@ -60,7 +61,8 @@ public class NotificationIT extends ComponentDemoTest {
 
     @Test
     public void notificationWithComponent() {
-        findElement(By.id("component-notification-button")).click();
+        clickElementWithJs(findElement(By.id("component-notification-button")));
+        // findElement(By.id("component-notification-button")).click();
         checkNotificationIsOpen();
         Assert.assertEquals(1,
                 findElements(By.id("component-notification")).size());
@@ -81,20 +83,15 @@ public class NotificationIT extends ComponentDemoTest {
     }
 
     private WebElement getOverlayContent() {
-        WebElement overlay = findElement(By.tagName(DIALOG_OVERLAY_TAG));
-        return getInShadowRoot(overlay, By.id("content"));
+        return overlay = findElement(By.tagName(DIALOG_OVERLAY_TAG));
     }
 
     private void checkNotificationIsClose() {
-        waitUntil(driver -> Boolean.FALSE.toString()
-                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
-                        .getAttribute("opened")));
+        waitForElementNotPresent(By.tagName(DIALOG_OVERLAY_TAG));
     }
 
     private void checkNotificationIsOpen() {
-        waitUntil(driver -> Boolean.TRUE.toString()
-                .equals(findElement(By.tagName(DIALOG_OVERLAY_TAG))
-                        .getAttribute("opened")));
+        waitForElementPresent(By.tagName(DIALOG_OVERLAY_TAG));
     }
 
     @Override
