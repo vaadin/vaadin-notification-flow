@@ -110,7 +110,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         clickElementWithJs(findElement(By.id("component-add-text-close")));
         checkNotificationIsClose();
     }
-    
+
     @Test
     public void notificationAddComponentAddText() {
         findElement(By.id("add-component-add-text-open")).click();
@@ -119,7 +119,6 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         assertNotificationOverlayContent("Moi");
         clickElementWithJs(findElement(By.id("add-component-add-text-close")));
         checkNotificationIsClose();
-        
     }
 
     private void assertButtonSize(int number) {
