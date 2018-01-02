@@ -42,7 +42,7 @@ public class NotificationView extends DemoView {
         // begin-source-example
         // source-example-heading: Default Notification
         Notification notification = new Notification(
-                "This notification has text content", 2000);
+                "This notification has text content", 3000);
         // end-source-example
         button.setId("default-notification-button");
         button.addClickListener(event -> notification.open());
@@ -56,7 +56,7 @@ public class NotificationView extends DemoView {
         // source-example-heading: Notification with position
         Notification notification = new Notification(
                 "This notification is located on Top-Left",
-                2000, Position.TOP_START);
+                3000, Position.TOP_START);
         // end-source-example
         button.setId("position-notification-button");
         button.addClickListener(event -> notification.open());

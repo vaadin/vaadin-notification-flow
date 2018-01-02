@@ -82,30 +82,24 @@ public class Notification
      * @param duration
      *            the duration in milliseconds to show the notification
      */
-    public Notification(String content, int duration) {
-        this(content, duration, Position.BOTTOM_START);
+    public Notification(String text, int duration) {
+        this(text, duration, Position.BOTTOM_START);
     }
 
     /**
-     * Creates a Notification with given text String, duration, vertical and
-     * horizontal Alignment.
+     * Creates a Notification with given text String, duration and position
      * <P>
      * Set to {@code 0} or a negative number to disable the notification
      * auto-closing.
-     * <P>
-     * Horizontal alignment is skipped in case verticalAlign is set to
-     * {@code top-stretch|middle|bottom-stretch}
      * 
      * @param text
-     *            the text of the Notification
+     *            the text of the notification
      * @param duration
      *            the duration in milliseconds to show the notification
-     * @param vertical
-     *            the vertical alignment of the notification. Valid values are
-     *            {@code top-stretch|top|middle|bottom|bottom-stretch}
-     * @param horizontal
-     *            the horizontal alignment of the notification.Valid values are
-     *            {@code start|center|end}
+     * @param position
+     *            the position of the notification. Valid enumerate values are
+     *            TOP_STRETCH, TOP_START, TOP_CENTER, TOP_END, MIDDLE,
+     *            BOTTOM_START, BOTTOM_CENTER, BOTTOM_END, BOTTOM_STRETCH
      */
     public Notification(String text, int duration, Position position) {
         getElement().appendChild(templateElement);
@@ -182,8 +176,8 @@ public class Notification
      * <p>
      * NOTE: When mixing this method with {@link #Notification(String)},
      * {@link #Notification(String, int)} and
-     * {@link #Notification(String, int, VerticalAlign, HorizontalAlign)},
-     * method will remove the text content.
+     * {@link #Notification(String, int, Position)} method will remove the text
+     * content.
      *
      * @param components
      *            the components to add
