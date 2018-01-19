@@ -142,6 +142,8 @@ public class Notification
             Position position) {
         Notification notification = new Notification(text, duration, position);
         notification.open();
+        notification.addOpenedChangeListener(
+                event -> notification.getElement().removeFromParent());
         return notification;
     }
 
