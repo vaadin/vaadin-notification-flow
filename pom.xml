@@ -36,7 +36,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.webjars.bower</groupId>
+            <groupId>org.webjars.bowergithub.vaadin</groupId>
             <artifactId>vaadin-notification</artifactId>
         </dependency>
         <dependency>
