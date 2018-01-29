@@ -105,7 +105,7 @@ public class Notification
         getElement().appendChild(templateElement);
         getElement().appendVirtualChild(container);
         setText(text);
-        setDuration((double) duration);
+        setDuration(duration);
         setPosition(position);
     }
 
@@ -178,6 +178,17 @@ public class Notification
      */
     public void setPosition(Position position) {
         this.setPosition(position.toString().toLowerCase().replace('_', '-'));
+    }
+
+    /**
+     * Set the duration in milliseconds to the notification. Set to {@code 0} or
+     * a negative number to disable the notification auto-closing.
+     * 
+     * @param duration
+     *            the duration of the notification
+     */
+    public void setDuration(int duration) {
+        getElement().setProperty("duration", duration);
     }
 
     /**
