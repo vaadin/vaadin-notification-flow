@@ -15,16 +15,17 @@
  */
 package com.vaadin.flow.component.notification;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasStyle;
-import com.vaadin.flow.component.ComponentSupplier;
 import javax.annotation.Generated;
-import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.Synchronize;
-import com.vaadin.flow.component.DomEvent;
+
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.ComponentSupplier;
+import com.vaadin.flow.component.DomEvent;
+import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.Synchronize;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.shared.Registration;
 
 /**
@@ -68,22 +69,6 @@ public class GeneratedVaadinNotification<R extends GeneratedVaadinNotification<R
      */
     public double getDuration() {
         return getElement().getProperty("duration", 0.0);
-    }
-
-    /**
-     * <p>
-     * Description copied from corresponding location in WebComponent:
-     * </p>
-     * <p>
-     * The duration in milliseconds to show the notification. Set to {@code 0}
-     * or a negative number to disable the notification auto-closing.
-     * </p>
-     * 
-     * @param duration
-     *            the double value to set
-     */
-    public void setDuration(double duration) {
-        getElement().setProperty("duration", duration);
     }
 
     /**
