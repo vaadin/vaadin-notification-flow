@@ -37,6 +37,7 @@ public class Notification extends GeneratedVaadinNotification<Notification>
 
     private final Element container = new Element("div", false);
     private final Element templateElement = new Element("template", false);
+    private boolean autoAddedToTheUi = false;
 
     /**
      * Enumeration of all available positions for notification component
@@ -84,7 +85,7 @@ public class Notification extends GeneratedVaadinNotification<Notification>
      * child components, use the {@link Text} component for the textual parts.
      */
     public Notification() {
-        appendBaseElements();
+        initBaseElementsAndListeners();
         getElement().getNode().runWhenAttached(ui -> ui
                 .beforeClientResponse(this, () -> attachComponentTemplate(ui)));
         setPosition(Position.BOTTOM_START);
@@ -134,7 +135,7 @@ public class Notification extends GeneratedVaadinNotification<Notification>
      *            BOTTOM_START, BOTTOM_CENTER, BOTTOM_END, BOTTOM_STRETCH
      */
     public Notification(String text, int duration, Position position) {
-        appendBaseElements();
+        initBaseElementsAndListeners();
         setText(text);
         setDuration((double) duration);
         setPosition(position);
@@ -155,9 +156,16 @@ public class Notification extends GeneratedVaadinNotification<Notification>
         add(components);
     }
 
-    private void appendBaseElements() {
+    private void initBaseElementsAndListeners() {
         getElement().appendChild(templateElement);
         getElement().appendChild(container);
+
+        addOpenedChangeListener(event -> {
+            if (autoAddedToTheUi && !isOpened()) {
+                getElement().removeFromParent();
+                autoAddedToTheUi = false;
+            }
+        });
     }
 
     /**
@@ -178,11 +186,6 @@ public class Notification extends GeneratedVaadinNotification<Notification>
             Position position) {
         Notification notification = new Notification(text, duration, position);
         notification.open();
-        notification.addOpenedChangeListener(event -> {
-            if (!notification.isOpened()) {
-                notification.getElement().removeFromParent();
-            }
-        });
         return notification;
     }
 
@@ -325,9 +328,13 @@ public class Notification extends GeneratedVaadinNotification<Notification>
      */
     @Override
     public void setOpened(boolean opened) {
-        if (opened && !getElement().getNode().isAttached()
-                && UI.getCurrent() != null) {
-            UI.getCurrent().add(this);
+        UI ui = UI.getCurrent();
+        if (opened && getElement().getNode().getParent() == null
+                && ui != null) {
+            ui.beforeClientResponse(ui, () -> {
+                ui.add(this);
+                autoAddedToTheUi = true;
+            });
         }
         super.setOpened(opened);
     }
