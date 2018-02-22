@@ -162,6 +162,23 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         waitForElementNotPresent(By.id("notification-outside-ui"));
     }
 
+    @Test
+    public void notificationWithButtonControl_isNotRemovedOnClose() {
+        List<WebElement> notification = findElements(
+                By.id("notification-with-button-control"));
+        Assert.assertEquals(1, notification.size());
+
+        findElement(By.id("notification-open")).click();
+        checkNotificationIsOpen();
+        clickElementWithJs(findElement(By.id("notification-close")));
+        checkNotificationIsClose();
+
+        // since the notification was added manually in the DOM, it shouldn't be
+        // removed after close
+        notification = findElements(By.id("notification-with-button-control"));
+        Assert.assertEquals(1, notification.size());
+    }
+
     private void assertButtonSize(int number) {
         Assert.assertEquals(number, getNotifications().iterator().next()
                 .findElements(By.tagName("button")).size());
