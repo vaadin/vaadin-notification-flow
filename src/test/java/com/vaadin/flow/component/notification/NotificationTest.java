@@ -23,6 +23,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 
 /**
@@ -62,6 +63,20 @@ public class NotificationTest {
         notification.removeAll();
         children = notification.getChildren().collect(Collectors.toList());
         Assert.assertEquals(0, children.size());
+    }
+
+    @Test
+    public void createNotificationWithComponentsInsideComponent_onlyRootComponentsAreReturned() {
+        Div container1 = new Div();
+        Div container2 = new Div(container1);
+
+        Notification notification = new Notification(container2);
+        List<Component> children = notification.getChildren()
+                .collect(Collectors.toList());
+        Assert.assertEquals(1, children.size());
+        Assert.assertThat(children, CoreMatchers.hasItems(container2));
+        Assert.assertThat(children,
+                CoreMatchers.not(CoreMatchers.hasItem(container1)));
     }
 
 }
