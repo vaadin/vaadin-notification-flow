@@ -15,7 +15,6 @@
  */
 package com.vaadin.flow.component.notification;
 
-import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -114,5 +113,11 @@ public class NotificationTest {
                     expectedDuration), expectedDuration,
                     notification.getDuration());
         }
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void setOpened_noUiInstance() {
+        Notification notification = new Notification();
+        notification.setOpened(true);
     }
 }
