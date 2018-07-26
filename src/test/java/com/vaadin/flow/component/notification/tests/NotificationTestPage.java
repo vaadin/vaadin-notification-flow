@@ -42,6 +42,43 @@ public class NotificationTestPage extends Div {
         createNotificationwithTextAndAddComponent();
         createNotificationAddComponentAddText();
         createNotificationOutsideUi();
+        createNotificationAndAddComponentAtIndex();
+    }
+
+    private void createNotificationAndAddComponentAtIndex() {
+        Notification notification = new Notification();
+        notification.setId("notification-add-component-at-index");
+        notification.add(new NativeButton(), new NativeButton(),
+                new NativeButton());
+
+        NativeButton buttonOn = new NativeButton("open notification",
+                event -> notification.open());
+        buttonOn.setId("open-notification-add-component-at-index");
+
+        NativeButton buttonOff = new NativeButton("open notification",
+                event -> notification.close());
+        buttonOff.setId("close-notification-add-component-at-index");
+
+        NativeButton addedButton = new NativeButton("Added Button");
+        addedButton.setId("added-button");
+        NativeButton addFirst = new NativeButton("Add to the first", event -> {
+            notification.addComponentAsFirst(addedButton);
+            notification.open();
+        });
+        addFirst.setId("button-to-first");
+
+        NativeButton addAtSecond = createTestButton(notification, addedButton,
+                "button-to-second", 1);
+
+        NativeButton addOverIndex = createTestButton(notification, addedButton,
+                "button-over-index", 10);
+
+        NativeButton addNegativeIndex = createTestButton(notification,
+                addedButton,
+                "button-negative-index", -10);
+
+        add(buttonOn, buttonOff, addFirst, addAtSecond, addOverIndex,
+                addNegativeIndex);
     }
 
     private void createNotificationWithButtonControl() {
@@ -215,6 +252,16 @@ public class NotificationTestPage extends Div {
         open.addClickListener(event -> notification.open());
         close.addClickListener(event -> notification.close());
         add(open, close);
+    }
+
+    private NativeButton createTestButton(Notification notification,
+            NativeButton addedButton, String buttonId, int index) {
+        NativeButton button = new NativeButton(buttonId, event -> {
+            notification.addComponentAtIndex(index, addedButton);
+            notification.open();
+        });
+        button.setId(buttonId);
+        return button;
     }
 
 }
