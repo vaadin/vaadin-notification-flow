@@ -105,7 +105,7 @@ public class NotificationTestPage extends Div {
         NativeButton buttonOn = new NativeButton("open notification",
                 event -> notification.open());
         buttonOn.setId("Open-notification-add-component");
-        
+
         NativeButton addButton = new NativeButton("add a new button", event -> {
             notification.addComponentAsFirst(new NativeButton("text"));
         });
