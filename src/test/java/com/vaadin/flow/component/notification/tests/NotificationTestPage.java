@@ -55,7 +55,7 @@ public class NotificationTestPage extends Div {
         addSeparator();
         createNotificationAndAddComponentAtIndex();
         addSeparator();
-        createNotificationAddComponentAfterOpen();
+        createNotificationWithComponentsAndAddComponentAfterOpen();
     }
 
     private void addSeparator() {
@@ -98,7 +98,7 @@ public class NotificationTestPage extends Div {
                 addNegativeIndex);
     }
 
-    private void createNotificationAddComponentAfterOpen() {
+    private void createNotificationWithComponentsAndAddComponentAfterOpen() {
         Notification notification = new Notification();
         notification.setId("notification-add-component-after-open");
 
