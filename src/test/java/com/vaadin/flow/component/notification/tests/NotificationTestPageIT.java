@@ -212,7 +212,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
     }
 
     @Test
-    public void AddComponentToOpenedNotification() {
+    public void addComponentToOpenedNotification() {
         waitForElementNotPresent(
                 By.id("notification-add-component-after-open"));
         findElement(By.id("Open-notification-add-component")).click();
@@ -220,7 +220,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         assertButtonNumberInNotification(4);
         findElement(By.id("Add-component-to-notification")).click();
         assertButtonNumberInNotification(5);
-        assertButtonText(0, "text");
+        assertButtonText(1, "text");
     }
 
     private void assertButtonText(int indexOfButton, String expectedText) {
