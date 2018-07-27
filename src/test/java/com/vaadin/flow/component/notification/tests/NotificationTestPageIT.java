@@ -184,7 +184,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         verifyInitialNotification(3);
         findElement(By.id("button-to-first")).click();
         assertButtonNumberInNotification(4);
-        assertButtonText(0);
+        assertButtonText(0, "Added Button");
     }
 
     @Test
@@ -192,7 +192,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         verifyInitialNotification(3);
         findElement(By.id("button-to-second")).click();
         assertButtonNumberInNotification(4);
-        assertButtonText(1);
+        assertButtonText(1, "Added Button");
     }
 
     @Test
@@ -200,7 +200,7 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         verifyInitialNotification(3);
         findElement(By.id("button-over-index")).click();
         assertButtonNumberInNotification(4);
-        assertButtonText(3);
+        assertButtonText(3, "Added Button");
     }
 
     @Test
@@ -208,13 +208,25 @@ public class NotificationTestPageIT extends AbstractComponentIT {
         verifyInitialNotification(3);
         findElement(By.id("button-negative-index")).click();
         assertButtonNumberInNotification(4);
-        assertButtonText(0);
+        assertButtonText(0, "Added Button");
     }
 
-    private void assertButtonText(int index) {
-        Assert.assertEquals("Button Text is not correct", "Added Button",
+    @Test
+    public void AddComponentToOpenedNotification() {
+        waitForElementNotPresent(
+                By.id("notification-add-component-after-open"));
+        findElement(By.id("Open-notification-add-component")).click();
+        waitForElementPresent(By.id("notification-add-component-after-open"));
+        assertButtonNumberInNotification(4);
+        findElement(By.id("Add-component-to-notification")).click();
+        assertButtonNumberInNotification(5);
+        assertButtonText(0, "text");
+    }
+
+    private void assertButtonText(int indexOfButton, String expectedText) {
+        Assert.assertEquals("Button Text is not correct", expectedText,
                 findElements(By.tagName(NOTIFICATION_CARD_TAG)).get(0)
-                        .findElements(By.tagName("button")).get(index)
+                        .findElements(By.tagName("button")).get(indexOfButton)
                         .getText());
     }
 
