@@ -27,9 +27,11 @@ import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.dom.Element;
+import com.vaadin.flow.dom.ElementFactory;
 import com.vaadin.flow.function.SerializableConsumer;
 import com.vaadin.flow.internal.HtmlUtils;
 import com.vaadin.flow.shared.Registration;
@@ -49,8 +51,8 @@ public class Notification extends GeneratedVaadinNotification<Notification>
     private static final SerializableConsumer<UI> NO_OP = ui -> {
     };
 
-    private final Element container = new Element("div", false);
-    private final Element templateElement = new Element("template", false);
+    private final Element container = ElementFactory.createDiv();
+    private final Element templateElement = new Element("template");
     private boolean autoAddedToTheUi = false;
 
     private SerializableConsumer<UI> deferredJob = new AttachComponentTemplate();
