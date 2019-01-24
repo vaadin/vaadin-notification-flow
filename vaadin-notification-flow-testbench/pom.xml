@@ -10,7 +10,7 @@
         <version>1.3-SNAPSHOT</version>
     </parent>
 
-    <artifactId>vaadin-notification-testbench</artifactId>
+    <artifactId>vaadin-notification-flow-testbench</artifactId>
     <packaging>jar</packaging>
 
     <name>Vaadin Notification Testbench API</name>
