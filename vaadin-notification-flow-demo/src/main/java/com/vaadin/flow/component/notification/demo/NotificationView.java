@@ -24,6 +24,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.demo.DemoView;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamRegistration;
@@ -44,6 +45,7 @@ public class NotificationView extends DemoView {
         createNotificationUsingStaticConvenienceMethod();
         createNotificationWithComponents();
         addStyledNotificationContent();
+        createThemeVariants();
     }
 
     private void createDefaultNotificaiton() {
@@ -140,5 +142,42 @@ public class NotificationView extends DemoView {
 
         button.setId("styled-content-notification-button");
         addCard("Notification with styled content", button);
+    }
+
+    private void createThemeVariants() {
+
+        //@formatter:off
+        // begin-source-example
+        // source-example-heading: Theme Variants
+        Notification primary = new Notification("Primary theme variant", 3000);
+        primary.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
+
+        Notification contrast = new Notification("Contrast theme variant", 3000);
+        contrast.addThemeVariants(NotificationVariant.LUMO_CONTRAST);
+
+        Notification success = new Notification("Success theme variant", 3000);
+        success.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+
+        Notification error = new Notification("Error theme variant", 3000);
+        error.addThemeVariants(NotificationVariant.LUMO_ERROR);
+        // end-source-example
+        //@formatter:on
+
+        Div buttons = new Div();
+
+        buttons.add(
+                new NativeButton("Primary theme variant", e -> primary.open()),
+
+                new NativeButton("Contrast theme variant",
+                        e -> contrast.open()),
+
+                new NativeButton("Success theme variant", e -> success.open()),
+
+                new NativeButton("Error theme variant", e -> error.open()));
+
+        buttons.getChildren().forEach(button -> button.getElement().getStyle()
+                .set("margin-right", "5px"));
+
+        addCard("Theme Variants", "Theme Variants", buttons);
     }
 }
