@@ -18,7 +18,10 @@ package com.vaadin.flow.component.notification.demo;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.NativeButton;
@@ -145,39 +148,127 @@ public class NotificationView extends DemoView {
     }
 
     private void createThemeVariants() {
-
-        //@formatter:off
-        // begin-source-example
-        // source-example-heading: Theme Variants
-        Notification primary = new Notification("Primary theme variant", 3000);
-        primary.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
-
-        Notification contrast = new Notification("Contrast theme variant", 3000);
-        contrast.addThemeVariants(NotificationVariant.LUMO_CONTRAST);
-
-        Notification success = new Notification("Success theme variant", 3000);
-        success.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-
-        Notification error = new Notification("Error theme variant", 3000);
-        error.addThemeVariants(NotificationVariant.LUMO_ERROR);
-        // end-source-example
-        //@formatter:on
-
-        Div buttons = new Div();
-
-        buttons.add(
-                new NativeButton("Primary theme variant", e -> primary.open()),
-
-                new NativeButton("Contrast theme variant",
-                        e -> contrast.open()),
-
-                new NativeButton("Success theme variant", e -> success.open()),
-
-                new NativeButton("Error theme variant", e -> error.open()));
-
-        buttons.getChildren().forEach(button -> button.getElement().getStyle()
-                .set("margin-right", "5px"));
-
-        addCard("Theme Variants", "Theme Variants", buttons);
+        createDefault();
+        createPrimary();
+        createContrast();
+        createSuccess();
+        createError();
     }
+
+    private void createDefault() {
+        // begin-source-example
+        // source-example-heading: Default
+        Notification notification = new Notification(
+                new Text("Please update your password"));
+
+        Button notNotButton = new Button("Not now", e -> notification.close());
+
+        Button openSettingsButton = new Button("Open settings",
+                e -> notification.close());
+        openSettingsButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        notification.add(notNotButton, openSettingsButton);
+
+        Button openButton = new Button("Default notification",
+                e -> notification.open());
+
+        // end-source-example
+        addCard("Theme Variants", "Default", openButton);
+    }
+
+    private void createPrimary() {
+        // begin-source-example
+        // source-example-heading: Primary
+        Notification notification = new Notification(
+                new Text("Get notified with our latest updates"));
+        notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
+
+        Button skipButton = new Button("Skip", e -> notification.close());
+
+        Button subscribeButton = new Button("Subscribe",
+                e -> notification.close());
+        subscribeButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        notification.add(skipButton, subscribeButton);
+
+        Button openButton = new Button("Primary notification",
+                e -> notification.open());
+        openButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        // end-source-example
+        addCard("Theme Variants", "Primary", openButton);
+    }
+
+    private void createContrast() {
+        // begin-source-example
+        // source-example-heading: Contrast
+        Notification notification = new Notification(
+                new Text("Message deleted"));
+        notification.addThemeVariants(NotificationVariant.LUMO_CONTRAST);
+
+        Button dismissButton = new Button("Dismiss", e -> notification.close());
+
+        Button undoButton = new Button("Undo", e -> notification.close());
+        undoButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        notification.add(dismissButton, undoButton);
+
+        Button openButton = new Button("Contrast notification",
+                e -> notification.open());
+        openButton.addThemeVariants(ButtonVariant.LUMO_CONTRAST,
+                ButtonVariant.LUMO_PRIMARY);
+
+        // end-source-example
+        addCard("Theme Variants", "Contrast", openButton);
+    }
+
+    private void createSuccess() {
+        // begin-source-example
+        // source-example-heading: Success
+        Notification notification = new Notification(
+                new Text("New version deployed sucessfully"));
+        notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+
+        Button viewLogButton = new Button("View log",
+                e -> notification.close());
+
+        Button openSiteButton = new Button("Open site",
+                e -> notification.close());
+        openSiteButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        notification.add(viewLogButton, openSiteButton);
+
+        Button openButton = new Button("Success notification",
+                e -> notification.open());
+        openButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS,
+                ButtonVariant.LUMO_PRIMARY);
+
+        // end-source-example
+        addCard("Theme Variants", "Success", openButton);
+    }
+
+    private void createError() {
+        // begin-source-example
+        // source-example-heading: Error
+        Notification notification = new Notification(
+                new Text("System error occured"));
+        notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+        Button thisIsFineButton = new Button("This is fine",
+                e -> notification.close());
+
+        Button investigateButton = new Button("Investigate",
+                e -> notification.close());
+        investigateButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        notification.add(thisIsFineButton, investigateButton);
+
+        Button openButton = new Button("Error notification",
+                e -> notification.open());
+        openButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
+
+        // end-source-example
+        addCard("Theme Variants", "Error", openButton);
+    }
+
 }
