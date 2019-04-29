@@ -18,7 +18,6 @@ package com.vaadin.flow.component.notification.demo;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -158,8 +157,9 @@ public class NotificationView extends DemoView {
     private void createDefault() {
         // begin-source-example
         // source-example-heading: Default
-        Notification notification = new Notification(
-                new Text("Please update your password"));
+        Notification notification = new Notification();
+
+        Label label = new Label("Please update your password");
 
         Button notNowButton = new Button("Not now", e -> notification.close());
 
@@ -167,12 +167,13 @@ public class NotificationView extends DemoView {
                 e -> notification.close());
         openSettingsButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        notification.add(notNowButton, openSettingsButton);
+        notification.add(label, notNowButton, openSettingsButton);
 
         Button openButton = new Button("Default notification",
                 e -> notification.open());
 
-        notNowButton.getStyle().set("margin", "0 var(--lumo-space-s)");
+        label.getStyle().set("margin-right", "0.5rem");
+        notNowButton.getStyle().set("margin-right", "0.5rem");
         // end-source-example
         addCard("Theme Variants", "Default", openButton);
     }
@@ -180,9 +181,10 @@ public class NotificationView extends DemoView {
     private void createPrimary() {
         // begin-source-example
         // source-example-heading: Primary
-        Notification notification = new Notification(
-                new Text("Get notified with our latest updates"));
+        Notification notification = new Notification();
         notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
+
+        Label label = new Label("Get notified with our latest updates");
 
         Button skipButton = new Button("Skip", e -> notification.close());
 
@@ -190,13 +192,14 @@ public class NotificationView extends DemoView {
                 e -> notification.close());
         subscribeButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        notification.add(skipButton, subscribeButton);
+        notification.add(label, skipButton, subscribeButton);
 
         Button openButton = new Button("Primary notification",
                 e -> notification.open());
         openButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        skipButton.getStyle().set("margin", "0 var(--lumo-space-s)");
+        label.getStyle().set("margin-right", "0.5rem");
+        skipButton.getStyle().set("margin-right", "0.5rem");
         // end-source-example
         addCard("Theme Variants", "Primary", openButton);
     }
@@ -204,23 +207,25 @@ public class NotificationView extends DemoView {
     private void createContrast() {
         // begin-source-example
         // source-example-heading: Contrast
-        Notification notification = new Notification(
-                new Text("Message deleted"));
+        Notification notification = new Notification();
         notification.addThemeVariants(NotificationVariant.LUMO_CONTRAST);
+
+        Label label = new Label("Message deleted");
 
         Button dismissButton = new Button("Dismiss", e -> notification.close());
 
         Button undoButton = new Button("Undo", e -> notification.close());
         undoButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        notification.add(dismissButton, undoButton);
+        notification.add(label, dismissButton, undoButton);
 
         Button openButton = new Button("Contrast notification",
                 e -> notification.open());
         openButton.addThemeVariants(ButtonVariant.LUMO_CONTRAST,
                 ButtonVariant.LUMO_PRIMARY);
 
-        dismissButton.getStyle().set("margin", "0 var(--lumo-space-s)");
+        label.getStyle().set("margin-right", "0.5rem");
+        dismissButton.getStyle().set("margin-right", "0.5rem");
         // end-source-example
         addCard("Theme Variants", "Contrast", openButton);
     }
@@ -228,9 +233,10 @@ public class NotificationView extends DemoView {
     private void createSuccess() {
         // begin-source-example
         // source-example-heading: Success
-        Notification notification = new Notification(
-                new Text("New version deployed sucessfully"));
+        Notification notification = new Notification();
         notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+
+        Label label = new Label("New version deployed sucessfully");
 
         Button viewLogButton = new Button("View log",
                 e -> notification.close());
@@ -239,14 +245,15 @@ public class NotificationView extends DemoView {
                 e -> notification.close());
         openSiteButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        notification.add(viewLogButton, openSiteButton);
+        notification.add(label, viewLogButton, openSiteButton);
 
         Button openButton = new Button("Success notification",
                 e -> notification.open());
         openButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS,
                 ButtonVariant.LUMO_PRIMARY);
 
-        viewLogButton.getStyle().set("margin", "0 var(--lumo-space-s)");
+        label.getStyle().set("margin-right", "0.5rem");
+        viewLogButton.getStyle().set("margin-right", "0.5rem");
         // end-source-example
         addCard("Theme Variants", "Success", openButton);
     }
@@ -254,9 +261,10 @@ public class NotificationView extends DemoView {
     private void createError() {
         // begin-source-example
         // source-example-heading: Error
-        Notification notification = new Notification(
-                new Text("System error occured"));
+        Notification notification = new Notification();
         notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+        Label label = new Label("System error occured");
 
         Button thisIsFineButton = new Button("This is fine",
                 e -> notification.close());
@@ -265,13 +273,14 @@ public class NotificationView extends DemoView {
                 e -> notification.close());
         investigateButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        notification.add(thisIsFineButton, investigateButton);
+        notification.add(label, thisIsFineButton, investigateButton);
 
         Button openButton = new Button("Error notification",
                 e -> notification.open());
         openButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
 
-        thisIsFineButton.getStyle().set("margin", "0 var(--lumo-space-s)");
+        label.getStyle().set("margin-right", "0.5rem");
+        thisIsFineButton.getStyle().set("margin-right", "0.5rem");
         // end-source-example
         addCard("Theme Variants", "Error", openButton);
     }
