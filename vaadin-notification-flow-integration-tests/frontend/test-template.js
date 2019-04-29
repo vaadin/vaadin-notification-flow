@@ -14,4 +14,4 @@ class TemplateButton extends PolymerElement {
   }
 }
         
-customElements.define(TestTemplate.is, TestTemplate);
+customElements.define(TemplateButton.is, TemplateButton);
