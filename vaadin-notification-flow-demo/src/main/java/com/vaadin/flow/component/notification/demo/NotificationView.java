@@ -161,17 +161,18 @@ public class NotificationView extends DemoView {
         Notification notification = new Notification(
                 new Text("Please update your password"));
 
-        Button notNotButton = new Button("Not now", e -> notification.close());
+        Button notNowButton = new Button("Not now", e -> notification.close());
 
         Button openSettingsButton = new Button("Open settings",
                 e -> notification.close());
         openSettingsButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        notification.add(notNotButton, openSettingsButton);
+        notification.add(notNowButton, openSettingsButton);
 
         Button openButton = new Button("Default notification",
                 e -> notification.open());
 
+        notNowButton.getStyle().set("margin", "0 var(--lumo-space-s)");
         // end-source-example
         addCard("Theme Variants", "Default", openButton);
     }
@@ -195,6 +196,7 @@ public class NotificationView extends DemoView {
                 e -> notification.open());
         openButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
+        skipButton.getStyle().set("margin", "0 var(--lumo-space-s)");
         // end-source-example
         addCard("Theme Variants", "Primary", openButton);
     }
@@ -218,6 +220,7 @@ public class NotificationView extends DemoView {
         openButton.addThemeVariants(ButtonVariant.LUMO_CONTRAST,
                 ButtonVariant.LUMO_PRIMARY);
 
+        dismissButton.getStyle().set("margin", "0 var(--lumo-space-s)");
         // end-source-example
         addCard("Theme Variants", "Contrast", openButton);
     }
@@ -243,6 +246,7 @@ public class NotificationView extends DemoView {
         openButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS,
                 ButtonVariant.LUMO_PRIMARY);
 
+        viewLogButton.getStyle().set("margin", "0 var(--lumo-space-s)");
         // end-source-example
         addCard("Theme Variants", "Success", openButton);
     }
@@ -267,6 +271,7 @@ public class NotificationView extends DemoView {
                 e -> notification.open());
         openButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
 
+        thisIsFineButton.getStyle().set("margin", "0 var(--lumo-space-s)");
         // end-source-example
         addCard("Theme Variants", "Error", openButton);
     }
