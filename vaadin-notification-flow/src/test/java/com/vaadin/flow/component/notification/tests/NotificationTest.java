@@ -26,9 +26,6 @@ import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 
-import javax.annotation.concurrent.NotThreadSafe;
-
-@NotThreadSafe
 public class NotificationTest {
 
     private Notification notification;

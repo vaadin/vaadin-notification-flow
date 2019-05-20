@@ -34,12 +34,9 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.dom.Element;
 
-import javax.annotation.concurrent.NotThreadSafe;
-
 /**
  * Unit tests for the Notification.
  */
-@NotThreadSafe
 public class NotificationTest {
 
     private UI ui = new UI();
