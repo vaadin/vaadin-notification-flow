@@ -57,7 +57,10 @@ public class NotificationView extends DemoView {
         Notification notification = new Notification(
                 "This notification has text content", 3000);
         button.addClickListener(event -> notification.open());
+
+        add(button);
         // end-source-example
+
         button.setId("default-notification-button");
         notification.setId("default-notification");
         addCard("Default Notification", button);
@@ -71,7 +74,10 @@ public class NotificationView extends DemoView {
                 "This notification is located on Top-Left", 3000,
                 Position.TOP_START);
         button.addClickListener(event -> notification.open());
+
+        add(button);
         // end-source-example
+
         button.setId("position-notification-button");
         notification.setId("position-notification");
         addCard("Notification with position", button);
@@ -82,7 +88,10 @@ public class NotificationView extends DemoView {
         // source-example-heading: Notification using static convenience method
         Notification notification = Notification.show(
                 "This is a notification created with static convenience method");
+
+        add(notification);
         // end-source-example
+
         notification.setId("static-notification");
         addCard("Notification using static convenience method", notification);
     }
@@ -99,7 +108,10 @@ public class NotificationView extends DemoView {
         buttonInside.addClickListener(event -> notification.close());
         notification.setPosition(Position.MIDDLE);
         button.addClickListener(event -> notification.open());
+
+        add(button);
         // end-source-example
+
         notification.setId("component-notification");
         content.setId("label-inside-notification");
         buttonInside.setId("button-inside-notification");
@@ -139,6 +151,8 @@ public class NotificationView extends DemoView {
                 "base://" + resource.getResourceUri().toString());
 
         button.addClickListener(event -> notification.open());
+
+        add(button);
         // end-source-example
 
         button.setId("styled-content-notification-button");
@@ -173,7 +187,10 @@ public class NotificationView extends DemoView {
 
         label.getStyle().set("margin-right", "0.5rem");
         notNowButton.getStyle().set("margin-right", "0.5rem");
+
+        add(openButton);
         // end-source-example
+
         addCard("Theme Variants", "Default", openButton);
     }
 
@@ -199,7 +216,10 @@ public class NotificationView extends DemoView {
 
         label.getStyle().set("margin-right", "0.5rem");
         skipButton.getStyle().set("margin-right", "0.5rem");
+
+        add(openButton);
         // end-source-example
+
         addCard("Theme Variants", "Primary", openButton);
     }
 
@@ -225,7 +245,10 @@ public class NotificationView extends DemoView {
 
         label.getStyle().set("margin-right", "0.5rem");
         dismissButton.getStyle().set("margin-right", "0.5rem");
+
+        add(openButton);
         // end-source-example
+
         addCard("Theme Variants", "Contrast", openButton);
     }
 
@@ -253,7 +276,10 @@ public class NotificationView extends DemoView {
 
         label.getStyle().set("margin-right", "0.5rem");
         viewLogButton.getStyle().set("margin-right", "0.5rem");
+
+        add(openButton);
         // end-source-example
+
         addCard("Theme Variants", "Success", openButton);
     }
 
@@ -280,7 +306,10 @@ public class NotificationView extends DemoView {
 
         label.getStyle().set("margin-right", "0.5rem");
         thisIsFineButton.getStyle().set("margin-right", "0.5rem");
+
+        add(openButton);
         // end-source-example
+
         addCard("Theme Variants", "Error", openButton);
     }
 
