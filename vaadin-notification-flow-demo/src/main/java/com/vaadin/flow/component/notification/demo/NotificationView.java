@@ -51,11 +51,12 @@ public class NotificationView extends DemoView {
     }
 
     private void createDefaultNotificaiton() {
-        NativeButton button = new NativeButton(BUTTON_CAPTION);
         // begin-source-example
         // source-example-heading: Default Notification
         Notification notification = new Notification(
                 "This notification has text content", 3000);
+
+        NativeButton button = new NativeButton(BUTTON_CAPTION);
         button.addClickListener(event -> notification.open());
 
         add(button);
@@ -67,12 +68,13 @@ public class NotificationView extends DemoView {
     }
 
     private void createNotificationWithPosition() {
-        NativeButton button = new NativeButton(BUTTON_CAPTION);
         // begin-source-example
         // source-example-heading: Notification with position
         Notification notification = new Notification(
                 "This notification is located on Top-Left", 3000,
                 Position.TOP_START);
+
+        NativeButton button = new NativeButton(BUTTON_CAPTION);
         button.addClickListener(event -> notification.open());
 
         add(button);
@@ -97,8 +99,6 @@ public class NotificationView extends DemoView {
     }
 
     private void createNotificationWithComponents() {
-        NativeButton button = new NativeButton(BUTTON_CAPTION);
-        button.setId("component-notification-button");
         // begin-source-example
         // source-example-heading: Notification with components
         Span content = new Span("Hello, I am a notification with components!");
@@ -107,6 +107,8 @@ public class NotificationView extends DemoView {
         notification.setDuration(3000);
         buttonInside.addClickListener(event -> notification.close());
         notification.setPosition(Position.MIDDLE);
+
+        NativeButton button = new NativeButton(BUTTON_CAPTION);
         button.addClickListener(event -> notification.open());
 
         add(button);
@@ -115,12 +117,11 @@ public class NotificationView extends DemoView {
         notification.setId("component-notification");
         content.setId("label-inside-notification");
         buttonInside.setId("button-inside-notification");
+        button.setId("component-notification-button");
         addCard("Notification with components", button);
     }
 
     private void addStyledNotificationContent() {
-        NativeButton button = new NativeButton(BUTTON_CAPTION);
-
         // begin-source-example
         // source-example-heading: Notification with styled content
         Div content = new Div();
@@ -150,6 +151,7 @@ public class NotificationView extends DemoView {
         UI.getCurrent().getPage().addStyleSheet(
                 "base://" + resource.getResourceUri().toString());
 
+        NativeButton button = new NativeButton(BUTTON_CAPTION);
         button.addClickListener(event -> notification.open());
 
         add(button);
