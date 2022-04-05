@@ -25,6 +25,7 @@ import org.openqa.selenium.WebElement;
 
 import com.vaadin.flow.testutil.AbstractComponentIT;
 import com.vaadin.flow.testutil.TestPath;
+import com.vaadin.testbench.TestBenchElement;
 
 @TestPath("notification-template-test")
 public class NotificationWithTemplateIT extends AbstractComponentIT {
@@ -43,13 +44,11 @@ public class NotificationWithTemplateIT extends AbstractComponentIT {
         open.click();
 
         waitForElementPresent(By.tagName(NOTIFICATION_CONTAINER_TAG));
-        WebElement overlay = findElement(
-                By.tagName(NOTIFICATION_CONTAINER_TAG));
-        WebElement template = overlay.findElement(By.id("template"));
+        TestBenchElement overlay = $(NOTIFICATION_CONTAINER_TAG).first();
+        TestBenchElement template = overlay.findElement(By.id("template"));
 
-        WebElement btn = findInShadowRoot(template, By.id("btn")).get(0);
-        WebElement container = findInShadowRoot(template, By.id("container"))
-                .get(0);
+        WebElement btn = template.$("*").id("btn");
+        WebElement container = template.$("*").id("container");
 
         List<WebElement> spans = container.findElements(By.tagName("span"));
         Assert.assertTrue(spans.isEmpty());
